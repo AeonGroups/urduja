@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #0b1f33;
+  --color-navy-soft: #143049;
+  --color-brass: #c4a46a;
+  --color-brass-deep: #a68545;
+  --color-paper: #f4f1ea;
+  --color-card: #fffcf8;
+  --color-ink: #14202b;
+  --color-mist: #5c6b7a;
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-manrope);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-manrope), sans-serif;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 3px;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+.hero-rise {
+  animation: rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-delay-1 {
+  animation-delay: 80ms;
+}
+
+.hero-delay-2 {
+  animation-delay: 180ms;
+}
+
+.hero-delay-3 {
+  animation-delay: 280ms;
+}
+
+.hero-delay-4 {
+  animation-delay: 400ms;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.marquee-track {
+  animation: marquee 32s linear infinite;
+}
+
+.orbit {
+  animation: spin 22s linear infinite;
+}
+
+.orbit-slow {
+  animation: spin 36s linear infinite reverse;
+}
+
+.pulse-ring {
+  animation: pulse-ring 7s ease-in-out infinite;
+}
+
+.service-row {
+  transition:
+    background-color 450ms ease,
+    color 450ms ease,
+    padding 450ms ease;
+}
+
+.service-row .service-index {
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-row:hover .service-index,
+.service-row:focus-within .service-index {
+  transform: translateX(8px);
+}
+
+.draw-line {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-row:hover .draw-line,
+.service-row:focus-within .draw-line {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-rise,
+  .reveal,
+  .marquee-track,
+  .orbit,
+  .orbit-slow,
+  .pulse-ring {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .service-row .service-index,
+  .draw-line {
+    transition: none;
+    transform: none;
+  }
+}
